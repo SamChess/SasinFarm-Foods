@@ -2598,3 +2598,8 @@ button.btn1:hover{
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.pagination_controls{
+   margin-bottom: 50px;
+   margin-right: 200px;
+   margin-left: 200px;
+}
