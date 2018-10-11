@@ -1603,6 +1603,9 @@ i.fa.fa-pencil{
 }
 .pagination {
     margin: 4em 0 0 0;
+    margin-bottom: 80px;
+    margin-right: 50px;
+    margin-left: 50px;
 }
 .pagination > li > a, .pagination > li > span {
     color: #999999;
@@ -2367,6 +2370,7 @@ button.btn1:hover{
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   padding: 1.25rem;
+  background-color: #E7E0E0;
 }
 
 .card-title {
@@ -2452,6 +2456,9 @@ button.btn1:hover{
   width: 100%;
   border-bottom-right-radius: calc(0.25rem - 1px);
   border-bottom-left-radius: calc(0.25rem - 1px);
+}
+.card-date{
+    font-size: 15px;
 }
 
 .card-deck {
@@ -2598,8 +2605,4 @@ button.btn1:hover{
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.pagination_controls{
-   margin-bottom: 50px;
-   margin-right: 200px;
-   margin-left: 200px;
-}
+

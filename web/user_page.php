@@ -85,10 +85,10 @@ if(isset($_SESSION['user_firstname'])){
 								<ul class="nav navbar-nav">
 									<li><a class="active list-border" href="user_page.php">Home</a></li>
 									<!--<li><a href="about.php">About</a></li>-->
-									<li class=""><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Market Place<span class="caret"></span></a>
+									<li class=""><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts<span class="caret"></span></a>
 									<ul class="dropdown-menu">
-										<li><a class="hvr-bounce-to-bottom" href="buy_products.php">Buy</a></li>
-										<li><a class="hvr-bounce-to-bottom" href="sell_products.php">Sell</a></li>
+										<li><a class="hvr-bounce-to-bottom" href="view_posts.php">View Posts</a></li>
+										<li><a class="hvr-bounce-to-bottom" href="create_posts.php">Create Posts</a></li>
 									</ul>
 									<li><a class="list-border1 active" href="log out.php">Log out</a></li>
 								</li>

@@ -20,7 +20,6 @@ if(isset($_SESSION['user_firstname'])){
 		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 		<!--// bootstrap-css -->
 		<!-- css -->
-		 <link href="css/3-col-portfolio.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 		<!--// css -->
 		<!-- font-awesome icons -->
@@ -83,10 +82,10 @@ if(isset($_SESSION['user_firstname'])){
 							<ul class="nav navbar-nav">
 								<li><a class="active list-border" href="user_page.php">Home</a></li>
 								<!--<li><a href="about.php">About</a></li>-->
-								<li class=""><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Market Place<span class="caret"></span></a>
+								<li class=""><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a class="hvr-bounce-to-bottom" href="buy_products.php">Buy</a></li>
-									<li><a class="hvr-bounce-to-bottom" href="sell_products.php">Sell</a></li>
+									<li><a class="hvr-bounce-to-bottom" href="view_posts.php">View Post</a></li>
+									<li><a class="hvr-bounce-to-bottom" href="create_posts.php">Create Post</a></li>
 								</ul>
 								<li><a class="list-border1 active" href="log out.php">Log out</a></li>
 								<div class="names">
@@ -101,104 +100,79 @@ if(isset($_SESSION['user_firstname'])){
 			</div>
 		</div>
 		<!-- //banner -->
-
-		<div class="container">
-		<div class="row">
-			<?php
-// Include the database configuration file
-include 'connection.php';
-   	$query=mysqli_query($connection,"select count(id) from `posts`");
-	$row = mysqli_fetch_row($query);
- 
-	$rows = $row[0];
- 
-	$page_rows = 6;
- 
-	$last = ceil($rows/$page_rows);
- 
-	if($last < 1){
-		$last = 1;
-	}
- 
-	$pagenum = 1;
- 
-	if(isset($_GET['pn'])){
-		$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
-	}
- 
-	if ($pagenum < 1) { 
-		$pagenum = 1; 
-	} 
-	else if ($pagenum > $last) { 
-		$pagenum = $last; 
-	}
- 
-	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
- 
- 
-	$paginationCtrls = '';
- 
-	if($last != 1){
- 
-	if ($pagenum > 1) {
-        $previous = $pagenum - 1;
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-default">Previous</a> &nbsp; &nbsp; ';
- 
-		for($i = $pagenum-4; $i < $pagenum; $i++){
-			if($i > 0){
-		        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-default">'.$i.'</a> &nbsp; ';
-			}
-	    }
-    }
- 
-	$paginationCtrls .= ''.$pagenum.' &nbsp; ';
- 
-	for($i = $pagenum+1; $i <= $last; $i++){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-default">'.$i.'</a> &nbsp; ';
-		if($i >= $pagenum+4){
-			break;
-		}
-	}
- 
-    if ($pagenum != $last) {
-        $next = $pagenum + 1;
-        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-default">Next</a> ';
-    }
-	}
-// Get images from the database
-$query = $connection->query("SELECT fileName,product,description FROM posts $limit");
-
-if($query->num_rows > 0){
-    while($row = $query->fetch_assoc()){
-        $imageURL = 'uploads/'.$row["fileName"];
-        $product= $row['product'];
-        $description= $row['description'];
-       
-        echo '<div class="col-lg-4 col-sm-6 portfolio-item">
-				<div class="card">
-					<a href="#"><img class="card-img-top" src="'. $imageURL.'" alt=""></a>
-					<div class="card-body">
-						<h4 class="card-title">
-						<a href="#">'.$product.'</a>
-						</h4>
-						<p class="card-text">'.$description.'</p>
-					</div>
-				</div>
-			</div>'
-
-           ?>
-
-<?php }
-}else{ ?>
-    <p>No image(s) found...</p>
-<?php } ?>
-
-			
+		<div class="about-heading">
+			<div class="container">
+				<h2>Create a Post</h2>
+			</div>
 		</div>
-<div class="pagination_controls"><?php echo $paginationCtrls; ?></div>
-	    </div>
-	 
-		<!-- /.row -->
+		<!-- contact -->
+		<div class="contact">
+			<div class="container">
+				<div class="agile-contact-form">
+					
+					<form name="sell_products" action="process_post.php"method="POST" enctype="multipart/form-data">
+						<fieldset class="fieldset2">
+							<label for="product_name">Product:</label><br>
+							<select name="product_name" class="select" name="product" style="width:100%" >
+								<?php
+								include_once "connection.php";
+								$sql = "SELECT product_name FROM products";
+								if (!$result = $connection-> query($sql)) {
+									echo $connection->error;
+								}
+								if ($result-> num_rows > 0) {
+										echo
+										"<option value='$product_name'>--products--</option>";
+								while($row = $result-> fetch_assoc()) {
+									$product_name = $row['product_name'];
+									echo
+										"<option value='".$product_name."'>".$product_name."</option>";
+								}
+								}
+								?>
+							</select>
+							<label for="location">Location:</label><br>
+							<select name="location_name" class="select" name="location" style="width:100%" >
+								<?php
+								include_once "connection.php";
+								$sql = "SELECT location_name FROM location";
+								if (!$result = $connection-> query($sql)) {
+									echo $connection->error;
+								}
+								if ($result-> num_rows > 0) {
+										echo
+										"<option value='$location_name'>--location--</option>";
+								while($row = $result-> fetch_assoc()) {
+									$location_name = $row['location_name'];
+									echo
+										"<option value='".$location_name."'>".$location_name."</option>";
+								}
+								}
+								?>
+							</select>
+							<label for="weight">Weight(Kilograms):</label><br>
+							<input type="text" id="weight" name="weight" class="select" style="width:100%" required>
+							<label for="price">Unit Price(kshs/kg):</label><br>
+							<input type="text" id="unit_price" class="select" name="unit_price" style="width:100%" required><br>
+							<label for='image'>Please add an Image of your Product:</label>
+							<input type="file" accept="image/*" name="file">
+							<label for="comment">Description:</label><br>
+							<textarea class="select" rows="3" id="comment" name="description" style="width: 100%" required></textarea><br>
+							<label for="weight">Phone Number:</label><br>
+							<input type="text" id="phone_number" name="phone_number" class="select" style="width:100%" required>
+							<label for="weight">Current Date:</label><br>
+							<input id="date" name="date" class="select" style="width:100%" disabled />
+							<script type="text/javascript">
+							document.getElementById("date").value = new Date();
+							</script><br>
+							<button type="submit "class="btn1" value="submit" name="submit">Create Post</button>
+						</fieldset>
+						
+					</form>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
 		<!-- footer -->
 		<div class="footer">
 			<div class="container">

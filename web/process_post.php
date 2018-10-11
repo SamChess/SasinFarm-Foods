@@ -33,20 +33,29 @@ echo $statusMsg;
     $product_name = mysqli_real_escape_string($connection, $_POST['product_name']);
     $location_name = mysqli_real_escape_string($connection, $_POST['location_name']);
     $weight = mysqli_real_escape_string($connection, $_POST["weight"]);
-    $units = mysqli_real_escape_string($connection, $_POST["units"]);
     $unit_price = mysqli_real_escape_string($connection, $_POST["unit_price"]);
-    $farmer_code = mysqli_real_escape_string($connection, $_POST["farmer_code"]);
+    $phone_number = mysqli_real_escape_string($connection, $_POST["phone_number"]);
     $description = mysqli_real_escape_string($connection, $_POST["description"]);
+    //$date = mysqli_real_escape_string($connection, $_POST["date"]);
 
 
 //check for errors
 //check for empty fields
-if(empty($product_name)||empty($location_name)||empty($weight)||empty($units)||empty($unit_price)||empty($farmer_code)||empty($description) ){
-    header("location: user_page.php?posts=empty");
+if(empty($product_name)||empty($location_name)||empty($weight)||empty($unit_price)||empty($phone_number)||empty($description) ){
+    echo $product;
+        echo $location;
+            echo $weight;
+                echo $unit_price;
+                    echo $phone_number;
+                        echo $fileName;
+                            echo $description;
+                                echo $date;
+
+    //header("location: user_page.php?posts=empty");
     
     exit();
 
-if(!preg_match("/^[0-9]*$/",$weight)|| !preg_match("/^[0-9]*$/",$unit_price) || !preg_match("/^[a-zA-Z]*$/",$description) || !preg_match("/^[a-zA-Z0-9]*$/",$farmer_code)){
+if(!preg_match("/^[0-9]*$/",$weight)|| !preg_match("/^[0-9]*$/",$unit_price) || !preg_match("/^[a-zA-Z]*$/",$description) || !preg_match("/^[a-zA-Z0-9]*$/",$phone_number)){
 
        header("location: user_page.php?post=invalid characters ");
     exit();
@@ -55,17 +64,17 @@ if(!preg_match("/^[0-9]*$/",$weight)|| !preg_match("/^[0-9]*$/",$unit_price) || 
 
     else{
     
-                $sql="INSERT INTO posts (product,location,weight,units,unit_price,farmer_code,fileName,description) VALUES (?,?,?,?,?,?,?,?)";
+                $sql="INSERT INTO product_posts (product,location,weight,unit_price,phone_number,fileName,description) VALUES (?,?,?,?,?,?,?)";
 
 
                 $stmt = $connection->prepare($sql);
-                $stmt->bind_param("ssssssss",$product_name, $location_name, $weight,$units,$unit_price,$farmer_code,$fileName,$description);
+                $stmt->bind_param("sssssss",$product_name, $location_name, $weight,$unit_price,$phone_number,$fileName,$description);
                 $bool = $stmt->execute();
 
 
                 if($bool){
-                     
-                header("location: sell_products.php?post=success");
+                    
+                header("location: user_page.php?post=success");
                 exit();
                 }
             }
