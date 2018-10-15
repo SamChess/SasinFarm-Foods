@@ -112,7 +112,7 @@ include 'connection.php';
  
 	$rows = $row[0];
  
-	$page_rows = 3;
+	$page_rows = 6;
  
 	$last = ceil($rows/$page_rows);
  
@@ -166,7 +166,7 @@ include 'connection.php';
     }
 	}
 // Get images from the database
-$query = $connection->query("SELECT fileName,product,description,dateC FROM product_posts $limit");
+$query = $connection->query("SELECT fileName,product,description,dateC FROM product_posts  ORDER BY dateC DESC $limit");
 
 if($query->num_rows > 0){
     while($row = $query->fetch_assoc()){
