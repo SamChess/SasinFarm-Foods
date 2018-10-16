@@ -15,8 +15,7 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
     if(in_array($fileType, $allowTypes)){
         // Upload file to server
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
-            // Insert image file name into database
-            //$insert = $connection->query("INSERT into posts (fileName) VALUES ('".$fileName."')");
+        
             echo"$fileName";
         
         }else{

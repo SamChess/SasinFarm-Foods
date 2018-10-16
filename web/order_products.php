@@ -1,9 +1,22 @@
 <?php
 session_start();
 if(isset($_SESSION['user_firstname'])){
-	//echo 'Hi, ' . $_SESSION["user_firstname"] . ' ' . $_SESSION["user_lastname"];
 }else{
 		header('Location: index.php?login=error');
+}
+$db_host = 'localhost'; // Server Name
+$db_user = 'root'; // Username
+$db_pass = ''; // Password
+$db_name = 'sasin'; // Database Name
+$conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
+if (!$conn) {
+die ('Failed to connect to MySQL: ' . mysqli_connect_error());
+}
+$id = $_GET['id'];
+$sql = 'SELECT id,product,location,weight,unit_price,phone_number,description,dateC FROM product_posts WHERE id='.$id.';';
+$query = mysqli_query($conn, $sql);
+if (!$query) {
+die ('SQL Error: ' . mysqli_error($conn));
 }
 ?>
 <!DOCTYPE html>
@@ -20,7 +33,6 @@ if(isset($_SESSION['user_firstname'])){
 		<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 		<!--// bootstrap-css -->
 		<!-- css -->
-		 <link href="css/3-col-portfolio.css" rel="stylesheet">
 		<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
 		<!--// css -->
 		<!-- font-awesome icons -->
@@ -64,7 +76,9 @@ if(isset($_SESSION['user_firstname'])){
 							</ul>
 						</div>
 					</div>
-					<div class="clearfix"> </div>
+					<div class="clearfix">
+						
+					</div>
 				</div>
 			</div>
 			<div class="header-bottom">
@@ -80,20 +94,23 @@ if(isset($_SESSION['user_firstname'])){
 								</button>
 							</div>
 							<!-- Collect the nav links, forms, and other content for toggling -->
-							<ul class="nav navbar-nav">
-								<li><a class="active list-border" href="user_page.php">Home</a></li>
-								<!--<li><a href="about.php">About</a></li>-->
-								<li class=""><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts<span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a class="hvr-bounce-to-bottom" href="view_posts.php">View Post</a></li>
-									<li><a class="hvr-bounce-to-bottom" href="create_posts.php">Create Post</a></li>
-								</ul>
-								<li><a class="list-border1 active" href="log out.php">Log out</a></li>
+							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<ul class="nav navbar-nav">
+									<li><a class="active list-border" href="user_page.php">Home</a></li>
+									<!--<li><a href="about.php">About</a></li>-->
+									<li class=""><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts<span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a class="hvr-bounce-to-bottom" href="view_posts.php">View Posts</a></li>
+										<li><a class="hvr-bounce-to-bottom" href="create_posts.php">Create Posts</a></li>
+									</ul>
+									<li><a class="list-border1 active" href="log out.php">Log out</a></li>
+								</li>
+								
 								<div class="names">
 									<?php
 									echo 'Hi, ' . $_SESSION["user_firstname"] . ' ' . $_SESSION["user_lastname"];
-									?>
-								</div>
+								    ?> 
+							</div>
 							</div>
 						</nav>
 					</div>
@@ -101,108 +118,46 @@ if(isset($_SESSION['user_firstname'])){
 			</div>
 		</div>
 		<!-- //banner -->
-
-		<div class="container">
-		<div class="row">
-			<?php
-// Include the database configuration file
-include 'connection.php';
-   	$query=mysqli_query($connection,"select count(id) from `product_posts`");
-	$row = mysqli_fetch_row($query);
- 
-	$rows = $row[0];
- 
-	$page_rows = 6;
- 
-	$last = ceil($rows/$page_rows);
- 
-	if($last < 1){
-		$last = 1;
-	}
- 
-	$pagenum = 1;
- 
-	if(isset($_GET['pn'])){
-		$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
-	}
- 
-	if ($pagenum < 1) { 
-		$pagenum = 1; 
-	} 
-	else if ($pagenum > $last) { 
-		$pagenum = $last; 
-	}
- 
-	$limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
- 
- 
-	$paginationCtrls = '';
- 
-	if($last != 1){
- 
-	if ($pagenum > 1) {
-        $previous = $pagenum - 1;
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-default">Previous</a> &nbsp; &nbsp; ';
- 
-		for($i = $pagenum-4; $i < $pagenum; $i++){
-			if($i > 0){
-		        $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-default">'.$i.'</a> &nbsp; ';
-			}
-	    }
-    }
- 
-	$paginationCtrls .= ''.$pagenum.' &nbsp; ';
- 
-	for($i = $pagenum+1; $i <= $last; $i++){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-default">'.$i.'</a> &nbsp; ';
-		if($i >= $pagenum+4){
-			break;
-		}
-	}
- 
-    if ($pagenum != $last) {
-        $next = $pagenum + 1;
-        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-default">Next</a> ';
-    }
-	}
-// Get images from the database
-$query = $connection->query("SELECT id,fileName,product,description,dateC FROM product_posts  ORDER BY dateC DESC $limit");
-
-if($query->num_rows > 0){
-    while($row = $query->fetch_assoc()){
-        $imageURL = 'uploads/'.$row["fileName"];
-        $product= $row['product'];
-        $description= $row['description'];
-        $dateC= $row['dateC'];
-        $id = $row['id'];
-        
-       
-        echo '<div class="col-lg-4 col-sm-6 portfolio-item">
-				 <div class="card">
-					<a href="order_products.php?id='.$id.'"><img class="card-img-top" src="'. $imageURL.'" alt=""></a>
-					<div class="card-body">
-						<h4 class="card-title">
-						<a href="order_products.php?id='.$id.'">'.$product.'</a>
-						</h4>
-						<p class="card-description">'.$description.'</p>
-					    <p class="card-date"><i>Date posted:    '.$dateC.'</i></p>
-					</div>
-				</div>
-			</div>'
-
-           ?>
-
-<?php }
-}else{ ?>
-    <p>No image(s) found...</p>
-<?php } ?>
-
-			
-		</div>
-<div class="pagination"><?php echo $paginationCtrls; ?></div>
-	    </div>
-	 
-		<!-- /.row -->
+		  <section id="">
+                        <h3 class="box-title">Posted Product</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Product Name</th>
+                                    <th>Location</th>
+                                    <th>Weight</th>
+                                    <th>Unit Price</th>
+                                    <th>Phone Number</th>
+                                    <th>Description</th>
+                                    <th>Date Posted</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $no = 1;
+                                if ($query-> num_rows > 0) {
+                                while ($row = mysqli_fetch_array($query))
+                                {
+                                echo
+                                '<tr>
+                                    <td>'.$no.'</td>
+                                    <td>'.$row['product'].'</td>
+                                    <td>'.$row['location'].'</td>
+                                    <td>'.$row['weight'].'</td>
+                                    <td>'.$row['unit_price'].'</td>
+                                    <td>'.$row['phone_number'].'</td>
+                                    <td>'.$row['description'].'</td>
+                                    <td>'.$row['dateC'].'</td>
+                                </tr>';
+                                $no++;
+                                }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </section>
+		
 		<!-- footer -->
 		<div class="footer">
 			<div class="container">
