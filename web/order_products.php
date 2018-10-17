@@ -118,45 +118,53 @@ die ('SQL Error: ' . mysqli_error($conn));
 			</div>
 		</div>
 		<!-- //banner -->
+	
+		<div class="container">
 		  <section id="">
-                        <h3 class="box-title">Posted Product</h3>
+                        <!--<h3 class="box-title">Posted Product</h3>-->
                         <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Product Name</th>
-                                    <th>Location</th>
-                                    <th>Weight</th>
-                                    <th>Unit Price</th>
-                                    <th>Phone Number</th>
-                                    <th>Description</th>
-                                    <th>Date Posted</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
+                              <?php
                                 if ($query-> num_rows > 0) {
                                 while ($row = mysqli_fetch_array($query))
                                 {
-                                echo
-                                '<tr>
-                                    <td>'.$no.'</td>
+                                echo '
+                                <tr>
+                                    <th>Product Name</th>
                                     <td>'.$row['product'].'</td>
+                                </tr>
+                                 <tr>
+                                    <th>Location</th>
                                     <td>'.$row['location'].'</td>
+                                </tr>
+                                     <tr>
+                                    <th>Weight</th>
                                     <td>'.$row['weight'].'</td>
+                                </tr>
+                                    <tr>
+                                    <th>Unit Price</th>
                                     <td>'.$row['unit_price'].'</td>
+                                </tr>
+                                     <tr>
+                                    <th>Phone number</th>
                                     <td>'.$row['phone_number'].'</td>
+                                </tr>
+                                 <tr>
+                                    <th>Description</th>
                                     <td>'.$row['description'].'</td>
+                                </tr>
+                                <tr>
+                                    <th>Date Posted</th>
                                     <td>'.$row['dateC'].'</td>
                                 </tr>';
-                                $no++;
+                    
+                   
+                              
                                 }
                                 }
                                 ?>
-                            </tbody>
                         </table>
                     </section>
+                </div>
 		
 		<!-- footer -->
 		<div class="footer">

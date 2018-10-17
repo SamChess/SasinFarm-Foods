@@ -122,8 +122,8 @@ include 'connection.php';
  
 	$pagenum = 1;
  
-	if(isset($_GET['pn'])){
-		$pagenum = preg_replace('#[^0-9]#', '', $_GET['pn']);
+	if(isset($_GET['page'])){
+		$pagenum = preg_replace('#[^0-9]#', '', $_GET['page']);
 	}
  
 	if ($pagenum < 1) { 
@@ -154,7 +154,7 @@ include 'connection.php';
 	$paginationCtrls .= ''.$pagenum.' &nbsp; ';
  
 	for($i = $pagenum+1; $i <= $last; $i++){
-		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-default">'.$i.'</a> &nbsp; ';
+		$paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?page='.$i.'" class="btn btn-default">'.$i.'</a> &nbsp; ';
 		if($i >= $pagenum+4){
 			break;
 		}
@@ -162,7 +162,7 @@ include 'connection.php';
  
     if ($pagenum != $last) {
         $next = $pagenum + 1;
-        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?pn='.$next.'" class="btn btn-default">Next</a> ';
+        $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?page='.$next.'" class="btn btn-default">Next</a> ';
     }
 	}
 // Get images from the database
