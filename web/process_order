@@ -1,0 +1,17 @@
+<?php
+//session_start();
+
+if (isset($_POST['submit'])){
+include_once "connection.php";
+// Escape user inputs for security
+$weight = mysqli_real_escape_string($connection, $_POST["weight"]);
+$due_date = mysqli_real_escape_string($connection, $_POST["due_date"]);
+if(empty($weight) || empty($due_date)){
+header("location: index.php?login=empty");
+exit();
+}else{
+date_default_timezone_set("Africa/Nairobi");
+echo "The time in " . date_default_timezone_get() . " is " . date("H:i:s");
+}
+echo "wow";
+?>

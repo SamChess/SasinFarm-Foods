@@ -97,7 +97,6 @@ die ('SQL Error: ' . mysqli_error($conn));
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 								<ul class="nav navbar-nav">
 									<li><a class="active list-border" href="user_page.php">Home</a></li>
-									<!--<li><a href="about.php">About</a></li>-->
 									<li class=""><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts<span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a class="hvr-bounce-to-bottom" href="view_posts.php">View Posts</a></li>
@@ -109,8 +108,8 @@ die ('SQL Error: ' . mysqli_error($conn));
 								<div class="names">
 									<?php
 									echo 'Hi, ' . $_SESSION["user_firstname"] . ' ' . $_SESSION["user_lastname"];
-								    ?> 
-							</div>
+									?>
+								</div>
 							</div>
 						</nav>
 					</div>
@@ -118,53 +117,70 @@ die ('SQL Error: ' . mysqli_error($conn));
 			</div>
 		</div>
 		<!-- //banner -->
-	
+		
 		<div class="container">
-		  <section id="">
-                        <!--<h3 class="box-title">Posted Product</h3>-->
-                        <table class="data-table">
-                              <?php
-                                if ($query-> num_rows > 0) {
-                                while ($row = mysqli_fetch_array($query))
-                                {
-                                echo '
-                                <tr>
-                                    <th>Product Name</th>
-                                    <td>'.$row['product'].'</td>
-                                </tr>
-                                 <tr>
-                                    <th>Location</th>
-                                    <td>'.$row['location'].'</td>
-                                </tr>
-                                     <tr>
-                                    <th>Weight</th>
-                                    <td>'.$row['weight'].'</td>
-                                </tr>
-                                    <tr>
-                                    <th>Unit Price</th>
-                                    <td>'.$row['unit_price'].'</td>
-                                </tr>
-                                     <tr>
-                                    <th>Phone number</th>
-                                    <td>'.$row['phone_number'].'</td>
-                                </tr>
-                                 <tr>
-                                    <th>Description</th>
-                                    <td>'.$row['description'].'</td>
-                                </tr>
-                                <tr>
-                                    <th>Date Posted</th>
-                                    <td>'.$row['dateC'].'</td>
-                                </tr>';
-                    
-                   
-                              
-                                }
-                                }
-                                ?>
-                        </table>
-                    </section>
-                </div>
+			<section id="">
+				<!--<h3 class="box-title">Posted Product</h3>-->
+				<table class="data-table">
+					<?php
+					if ($query-> num_rows > 0) {
+					while ($row = mysqli_fetch_array($query))
+					{
+					echo '
+					<tr>
+							<th>Product Name</th>
+							<td>'.$row['product'].'</td>
+					</tr>
+					<tr>
+							<th>Location</th>
+							<td>'.$row['location'].'</td>
+					</tr>
+					<tr>
+							<th>Weight(Kilograms)</th>
+							<td>'.$row['weight'].'</td>
+					</tr>
+					<tr>
+							<th>Unit Price(KES)</th>
+							<td>'.$row['unit_price'].'</td>
+					</tr>
+					<tr>
+							<th>Phone number</th>
+							<td>'.$row['phone_number'].'</td>
+					</tr>
+					<tr>
+							<th>Description</th>
+							<td>'.$row['description'].'</td>
+					</tr>
+					<tr>
+							<th>Date Posted</th>
+							<td>'.$row['dateC'].'</td>
+					</tr>';
+					}
+					}
+					?>
+				</table>
+			</section>
+			<div class="contact">
+				<div class="container">
+					<div class="agile-contact-form">
+						<div class="agileinfo-contact-form-grid">
+							<form name="order" action="" method="POST">
+								<fieldset>
+									<p>If you satisfied with the product,please create your order</p>
+									<br>
+									<label for="weight">Weight:</label><br>
+									<input type="text" name="weight" placeholder="weight" required=""><br>
+									<label for='date' >Due Date:</label><br>
+									<input type='date' name='due_date' id='due_date' maxlength="50" required/><br><br>
+									<button type="submit" class="btn1" name="submit"value="submit">Create Order</button>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
 		
 		<!-- footer -->
 		<div class="footer">

@@ -165,8 +165,8 @@ include 'connection.php';
         $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?page='.$next.'" class="btn btn-default">Next</a> ';
     }
 	}
-// Get images from the database
-$query = $connection->query("SELECT id,fileName,product,description,dateC FROM product_posts  ORDER BY dateC DESC $limit");
+// Get images from the databaseweight,
+$query = $connection->query("SELECT id,fileName,product,weight,description,dateC FROM product_posts  ORDER BY dateC DESC $limit");
 
 if($query->num_rows > 0){
     while($row = $query->fetch_assoc()){
