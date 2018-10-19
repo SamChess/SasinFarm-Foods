@@ -128,32 +128,32 @@ die ('SQL Error: ' . mysqli_error($conn));
 					{
 					echo '
 					<tr>
-							<th>Product Name</th>
-							<td>'.$row['product'].'</td>
+								<th>Product Name</th>
+								<td>'.$row['product'].'</td>
 					</tr>
 					<tr>
-							<th>Location</th>
-							<td>'.$row['location'].'</td>
+								<th>Location</th>
+								<td>'.$row['location'].'</td>
 					</tr>
 					<tr>
-							<th>Weight(Kilograms)</th>
-							<td>'.$row['weight'].'</td>
+								<th>Weight(Kilograms)</th>
+								<td>'.$row['weight'].'</td>
 					</tr>
 					<tr>
-							<th>Unit Price(KES)</th>
-							<td>'.$row['unit_price'].'</td>
+								<th>Unit Price(KES)</th>
+								<td>'.$row['unit_price'].'</td>
 					</tr>
 					<tr>
-							<th>Phone number</th>
-							<td>'.$row['phone_number'].'</td>
+								<th>Phone number</th>
+								<td>'.$row['phone_number'].'</td>
 					</tr>
 					<tr>
-							<th>Description</th>
-							<td>'.$row['description'].'</td>
+								<th>Description</th>
+								<td>'.$row['description'].'</td>
 					</tr>
 					<tr>
-							<th>Date Posted</th>
-							<td>'.$row['dateC'].'</td>
+								<th>Date Posted</th>
+								<td>'.$row['dateC'].'</td>
 					</tr>';
 					}
 					}
@@ -163,23 +163,71 @@ die ('SQL Error: ' . mysqli_error($conn));
 			<div class="contact">
 				<div class="container">
 					<div class="agile-contact-form">
-						<div class="agileinfo-contact-form-grid">
 							<form name="order" action="" method="POST">
 								<fieldset>
-									<p>If you satisfied with the product,please create your order</p>
+									<p style="margin-left: 100px;">If you satisfied with the product,please create your order.Ensure you include your phone number.</p>
 									<br>
-									<label for="weight">Weight:</label><br>
-									<input type="text" name="weight" placeholder="weight" required=""><br>
-									<label for='date' >Due Date:</label><br>
-									<input type='date' name='due_date' id='due_date' maxlength="50" required/><br><br>
-									<button type="submit" class="btn1" name="submit"value="submit">Create Order</button>
+							        <textarea id="comment" name="order" style=" width:600px;height:160px;margin-left:100px; margin-right:190px;margin-bottom:50px;" required></textarea><br>
+									<button type="submit" class="btn1" name="submit"value="submit"style="margin-left:100px;">Create Order</button>
+									<?php
+									// Be sure to include the file you've just downloaded
+									if (isset($_POST['submit'])){
+									require_once('AfricasTalkingGateway.php');
+									require_once('connection.php');
+									$id = $_GET['id'];
+									$sql = 'SELECT id,phone_number,dateC FROM product_posts WHERE id='.$id.';';
+                                    $order = mysqli_real_escape_string($connection, $_POST["order"]);
+                                    
+
+									// Specify your authentication credentials
+									$username   = "sandbox";
+									$apikey     = "f6b913f6c76c8d92a14b6915d61a6968ed0a27c76437ac593a70618907035bb8";
+									// Specify the numbers that you want to send to in a comma-separated list
+									// Please ensure you include the country code (+254 for Kenya in this case)
+									$recipients = '0715685500,0706856000';
+									// And of course we want our recipients to know what we really do
+
+									$message    =$order;
+									// Create a new instance of our awesome gateway class
+									$gateway    = new AfricasTalkingGateway($username, $apikey);
+									/*************************************************************************************
+									NOTE: If connecting to the sandbox:
+									1. Use "sandbox" as the username
+									2. Use the apiKey generated from your sandbox application
+									https://account.africastalking.com/apps/sandbox/settings/key
+									3. Add the "sandbox" flag to the constructor
+									$gateway  = new AfricasTalkingGateway($username, $apiKey, "sandbox");
+									**************************************************************************************/
+									// Any gateway error will be captured by our custom Exception class below,
+									// so wrap the call in a try-catch block
+									try
+									{
+									// Thats it, hit send and we'll take care of the rest.
+									$results = $gateway->sendMessage($recipients, $message);
+									
+									foreach($results as $result) {
+									// status is either "Success" or "error message"
+									//echo " Number: " .$result->number;
+									//echo " Status: " .$result->status;
+									//echo " StatusCode: " .$result->statusCode;
+									//echo " MessageId: " .$result->messageId;
+									//echo " Cost: "   .$result->cost."\n";
+									echo "You have successfully sent an alert to the Seller!!";
+									}
+									}
+									catch ( AfricasTalkingGatewayException $e )
+									{
+									echo "Encountered an error while sending: ".$e->getMessage();
+									}
+								}
+									?>
 								</fieldset>
 							</form>
 						</div>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
-			</div>
+		
 		</div>
 		
 		<!-- footer -->

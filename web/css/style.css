@@ -1844,18 +1844,6 @@ i.fa.fa-pencil{
     margin-bottom: 1.5em; 
 
 }
-#due_date{
-     display: inline-block;
-    background: none;
-    border: 1.5px solid #BBBBBB;
-    width: 50%;
-    outline: none;
-    padding: 10px 15px 10px 15px;
-    font-size: .9em;
-    color: #BBBBBB;
-    margin-bottom: 1.5em; 
-
-}
 button.btn1{
     border: solid 1px #212121;
     color: #212121;
