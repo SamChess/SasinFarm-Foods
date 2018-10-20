@@ -2,7 +2,7 @@
 session_start();
 if(isset($_SESSION['user_firstname'])){
 }else{
-    header("location: ../../web/log in.php?login error");
+header("location: ../../web/log in.php?login error");
 }
 ?>
 <!DOCTYPE html>
@@ -67,169 +67,182 @@ if(isset($_SESSION['user_firstname'])){
                         </span> </a>
                     </div>
                     <!-- /Logo -->
+                </div>
+                
+            </nav>
+            
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav slimscrollsidebar">
+                    <div class="sidebar-head">
+                        <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
                     </div>
-                 
-                </nav>
-               
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav slimscrollsidebar">
-                        <div class="sidebar-head">
-                            <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
-                        </div>
-                        <ul class="nav" id="side-menu">
-                            <li style="padding: 70px 0 0;">
-                                <a href="index_admin.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="Users.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Users</a>
-                            </li>
-                            <li>
-                                <a href="locations.php" class="waves-effect"><i class=" fa fa-arrows-alt fa-fw" aria-hidden="true"></i>Locations</a>
-                            </li>
-                            <li>
-                                <a href="fontawesome.html" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Icons</a>
-                            </li>
-                            <li>
-                                <a href="map-google.html" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Google Map</a>
-                            </li>
-                            <li>
-                                <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Blank Page</a>
-                            </li>
-                            <li>
-                                <a href="admin_logout.php" class="waves-effect"><i class="glyphicon glyphicon-log-out"aria-hidden="true"></i>   Log out</a>
-                            </li>
-                        </ul>
-    
-                    </div>
+                    <ul class="nav" id="side-menu">
+                        <li style="padding: 70px 0 0;">
+                            <a href="index_admin.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Posts</a>
+                        </li>
+                        <li>
+                            <a href="Users.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Users</a>
+                        </li>
+                        <li>
+                            <a href="locations.php" class="waves-effect"><i class=" fa fa-arrows-alt fa-fw" aria-hidden="true"></i>Locations</a>
+                        </li>
+                        <li>
+                            <a href="products.php" class="waves-effect"><i class="fa fa-pagelines fa-fw" aria-hidden="true"></i>Products</a>
+                        </li>
+                        <li>
+                            <a href="map-google.html" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Google Map</a>
+                        </li>
+                        <li>
+                            <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Blank Page</a>
+                        </li>
+                        <li>
+                            <a href="admin_logout.php" class="waves-effect"><i class="glyphicon glyphicon-log-out"aria-hidden="true"></i>   Log out</a>
+                        </li>
+                    </ul>
                     
                 </div>
-                <!-- ============================================================== -->
-                <!-- End Left Sidebar -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Page Content -->
-                <!-- ============================================================== -->
-                <div id="page-wrapper">
-                    <div class="container-fluid">
-                        
-                        <!-- ============================================================== -->
-                        <!-- table -->
-                        <!-- ============================================================== -->
-                        <div class="row">
-                            <div class="col-md-12 col-lg-12 col-sm-12">
-                                <div class="white-box">
-                                    <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
-                                        <select class="form-control pull-right row b-none">
-                                            <option>March 2017</option>
-                                            <option>April 2017</option>
-                                            <option>May 2017</option>
-                                            <option>June 2017</option>
-                                            <option>July 2017</option>
-                                        </select>
-                                    </div>
-                                    <h3 class="box-title">Recent sales</h3>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>NAME</th>
-                                                    <th>STATUS</th>
-                                                    <th>DATE</th>
-                                                    <th>PRICE</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td class="txt-oflo">Elite admin</td>
-                                                    <td>SALE</td>
-                                                    <td class="txt-oflo">April 18, 2017</td>
-                                                    <td><span class="text-success">$24</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td class="txt-oflo">Real Homes WP Theme</td>
-                                                    <td>EXTENDED</td>
-                                                    <td class="txt-oflo">April 19, 2017</td>
-                                                    <td><span class="text-info">$1250</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td class="txt-oflo">Ample Admin</td>
-                                                    <td>EXTENDED</td>
-                                                    <td class="txt-oflo">April 19, 2017</td>
-                                                    <td><span class="text-info">$1250</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td class="txt-oflo">Medical Pro WP Theme</td>
-                                                    <td>TAX</td>
-                                                    <td class="txt-oflo">April 20, 2017</td>
-                                                    <td><span class="text-danger">-$24</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td class="txt-oflo">Hosting press html</td>
-                                                    <td>SALE</td>
-                                                    <td class="txt-oflo">April 21, 2017</td>
-                                                    <td><span class="text-success">$24</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>6</td>
-                                                    <td class="txt-oflo">Digital Agency PSD</td>
-                                                    <td>SALE</td>
-                                                    <td class="txt-oflo">April 23, 2017</td>
-                                                    <td><span class="text-danger">-$14</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>7</td>
-                                                    <td class="txt-oflo">Helping Hands WP Theme</td>
-                                                    <td>MEMBER</td>
-                                                    <td class="txt-oflo">April 22, 2017</td>
-                                                    <td><span class="text-success">$64</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <!-- /.container-fluid -->
-                <footer class="footer text-center"> 2018 &copy; SasinFarm Foods </footer>
+                
             </div>
             <!-- ============================================================== -->
-            <!-- End Page Content -->
+            <!-- End Left Sidebar -->
             <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Page Content -->
+            <!-- ============================================================== -->
+            <div id="page-wrapper">
+                <div class="container-fluid">
+                    
+                    <!-- ============================================================== -->
+                    <!-- table -->
+                    <!-- ============================================================== -->
+                    
+                    <?php
+                    // Include the database configuration file
+                    include 'connection.php';
+                    $query=mysqli_query($connection,"select count(id) from `product_posts`");
+                    $row = mysqli_fetch_row($query);
+                    
+                    $rows = $row[0];
+                    
+                    $page_rows = 12;
+                    
+                    $last = ceil($rows/$page_rows);
+                    
+                    if($last < 1){
+                    $last = 1;
+                    }
+                    
+                    $pagenum = 1;
+                    
+                    if(isset($_GET['page'])){
+                    $pagenum = preg_replace('#[^0-9]#', '', $_GET['page']);
+                    }
+                    
+                    if ($pagenum < 1) {
+                    $pagenum = 1;
+                    }
+                    else if ($pagenum > $last) {
+                    $pagenum = $last;
+                    }
+                    
+                    $limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
+                    
+                    
+                    $paginationCtrls = '';
+                    
+                    if($last != 1){
+                    
+                    if ($pagenum > 1) {
+                    $previous = $pagenum - 1;
+                    $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$previous.'" class="btn btn-default">Previous</a> &nbsp; &nbsp; ';
+                    
+                    for($i = $pagenum-4; $i < $pagenum; $i++){
+                    if($i > 0){
+                    $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?pn='.$i.'" class="btn btn-default">'.$i.'</a> &nbsp; ';
+                    }
+                    }
+                    }
+                    
+                    $paginationCtrls .= ''.$pagenum.' &nbsp; ';
+                    
+                    for($i = $pagenum+1; $i <= $last; $i++){
+                    $paginationCtrls .= '<a href="'.$_SERVER['PHP_SELF'].'?page='.$i.'" class="btn btn-default">'.$i.'</a> &nbsp; ';
+                    if($i >= $pagenum+4){
+                    break;
+                    }
+                    }
+                    
+                    if ($pagenum != $last) {
+                    $next = $pagenum + 1;
+                    $paginationCtrls .= ' &nbsp; &nbsp; <a href="'.$_SERVER['PHP_SELF'].'?page='.$next.'" class="btn btn-default">Next</a> ';
+                    }
+                    }
+                    // Get images from the databaseweight,
+                    $query = $connection->query("SELECT id,fileName,product,weight,description,dateC FROM product_posts  ORDER BY dateC DESC $limit");
+                    if($query->num_rows > 0){
+                    while($row = $query->fetch_assoc()){
+                    $imageURL = 'uploads/'.$row["fileName"];
+                    $product= $row['product'];
+                    $description= $row['description'];
+                    $dateC= $row['dateC'];
+                    $id = $row['id'];
+                    
+                    
+                    echo '<div class="col-lg-4 col-sm-6 portfolio-item">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                <a href="index_admin.php?id='.$id.'">'.$product.'</a>
+                                </h4>
+                                <p class="card-description">'.$description.'</p>
+                                <p class="card-date"><i>Date posted:    '.$dateC.'</i></p>
+                                <p><a href="delete_post.php?id='.$id.'">Remove Post</a></p>
+                            </div>
+                        </div>
+                    </div>'
+                    ?>
+                    <?php }
+                    }else{ ?>
+                    <p>No image(s) found...</p>
+                    <?php } ?>
+                    
+                </div>
+                <div class="pagination"><?php echo $paginationCtrls; ?></div>
+            </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Wrapper -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- All Jquery -->
-        <!-- ============================================================== -->
-        <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap Core JavaScript -->
-        <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- Menu Plugin JavaScript -->
-        <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
-        <!--slimscroll JavaScript -->
-        <script src="js/jquery.slimscroll.js"></script>
-        <!--Wave Effects -->
-        <script src="js/waves.js"></script>
-        <!--Counter js -->
-        <script src="../plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
-        <script src="../plugins/bower_components/counterup/jquery.counterup.min.js"></script>
-        <!-- chartist chart -->
-        <script src="../plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
-        <script src="../plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
-        <!-- Sparkline chart JavaScript -->
-        <script src="../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
-        <!-- Custom Theme JavaScript -->
-        <script src="js/custom.min.js"></script>
-        <script src="js/dashboard1.js"></script>
-        <script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
-    </body>
+        <!-- /.container-fluid -->
+    <footer class="footer text-center"> 2018 &copy; SasinFarm Foods </footer>
+</div>
+<!-- ============================================================== -->
+<!-- End Page Content -->
+<!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Menu Plugin JavaScript -->
+<script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+<!--slimscroll JavaScript -->
+<script src="js/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="js/waves.js"></script>
+<!--Counter js -->
+<script src="../plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+<script src="../plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+<!-- chartist chart -->
+<script src="../plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
+<script src="../plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+<!-- Sparkline chart JavaScript -->
+<script src="../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="js/custom.min.js"></script>
+<script src="js/dashboard1.js"></script>
+<script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+</body>
 </html>

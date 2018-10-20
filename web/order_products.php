@@ -170,7 +170,6 @@ die ('SQL Error: ' . mysqli_error($conn));
 							        <textarea id="comment" name="order" style=" width:600px;height:160px;margin-left:100px; margin-right:190px;margin-bottom:50px;" required></textarea><br>
 									<button type="submit" class="btn1" name="submit"value="submit"style="margin-left:100px;">Create Order</button>
 									<?php
-									// Be sure to include the file you've just downloaded
 									if (isset($_POST['submit'])){
 									require_once('AfricasTalkingGateway.php');
 									require_once('connection.php');
@@ -179,27 +178,18 @@ die ('SQL Error: ' . mysqli_error($conn));
                                     $order = mysqli_real_escape_string($connection, $_POST["order"]);
                                     
 
-									// Specify your authentication credentials
+									// authentication credentials
 									$username   = "sandbox";
 									$apikey     = "f6b913f6c76c8d92a14b6915d61a6968ed0a27c76437ac593a70618907035bb8";
 									// Specify the numbers that you want to send to in a comma-separated list
-									// Please ensure you include the country code (+254 for Kenya in this case)
 									$recipients = '0715685500,0706856000';
-									// And of course we want our recipients to know what we really do
+									// message order
 
 									$message    =$order;
 									// Create a new instance of our awesome gateway class
 									$gateway    = new AfricasTalkingGateway($username, $apikey);
-									/*************************************************************************************
-									NOTE: If connecting to the sandbox:
-									1. Use "sandbox" as the username
-									2. Use the apiKey generated from your sandbox application
-									https://account.africastalking.com/apps/sandbox/settings/key
-									3. Add the "sandbox" flag to the constructor
-									$gateway  = new AfricasTalkingGateway($username, $apiKey, "sandbox");
-									**************************************************************************************/
-									// Any gateway error will be captured by our custom Exception class below,
-									// so wrap the call in a try-catch block
+							
+						
 									try
 									{
 									// Thats it, hit send and we'll take care of the rest.

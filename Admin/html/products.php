@@ -2,7 +2,7 @@
 session_start();
 if(isset($_SESSION['user_firstname'])){
 }else{
-    header("location: ../../web/log in.php?login error");
+header("location: ../../web/log in.php?login error");
 }
 $db_host = 'localhost'; // Server Name
 $db_user = 'root'; // Username
@@ -12,7 +12,7 @@ $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 if (!$conn) {
 die ('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
-$sql = 'SELECT id,firstname,lastname,email,gender,country,dob FROM users WHERE access_level=0;';
+$sql = 'SELECT id,product_name FROM products';
 $query = mysqli_query($conn, $sql);
 if (!$query) {
 die ('SQL Error: ' . mysqli_error($conn));
@@ -26,8 +26,7 @@ die ('SQL Error: ' . mysqli_error($conn));
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
-        <title>Admin-SasinFarm Foods </title>
+        <title>Admin-SasinFarm Foods</title>
         <!-- Bootstrap Core CSS -->
         <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Menu CSS -->
@@ -50,7 +49,7 @@ die ('SQL Error: ' . mysqli_error($conn));
         margin: auto;
         font-family: "Lucida Sans Unicode", "Lucida Grande", "Segoe Ui";
         font-size: 12px;
-        width:100%;
+        width:50%;
         }
         h1 {
         margin: 25px auto 0;
@@ -82,15 +81,17 @@ die ('SQL Error: ' . mysqli_error($conn));
         color: #FFFFFF;
         border-color: #6ea1cc !important;
         text-transform: uppercase;
+        min-width: 450px;
         }
         /* Table Body */
         .data-table tbody td {
         color: #353535;
+        text-transform: uppercase;
         }
         .data-table tbody td:first-child,
         .data-table tbody td:nth-child(4),
         .data-table tbody td:last-child {
-        text-align: right;
+        
         }
         .data-table tbody tr:nth-child(odd) td {
         background-color: #f4fbff;
@@ -110,6 +111,19 @@ die ('SQL Error: ' . mysqli_error($conn));
         .data-table tbody td:empty
         {
         background-color: #ffcccc;
+        }
+        .form_location input[type="text"]{
+        width: 40%;
+        color: #999999;
+        outline: none;
+        font-size:15px;
+        padding: .5em;
+        margin-left:355px;
+        margin-top: 20px;
+        -webkit-appearance: none;
+        background: none;
+        max-height: 50px;
+        }
         }
         </style>
         
@@ -157,17 +171,15 @@ die ('SQL Error: ' . mysqli_error($conn));
                             <a href="locations.php" class="waves-effect"><i class=" fa fa-arrows-alt fa-fw" aria-hidden="true"></i>Locations</a>
                         </li>
                         <li>
-                            <a href="products.php" class="waves-effect"><i class="fa  fa-pagelines fa-fw" aria-hidden="true"></i>Products</a>
+                            <a href="products.php" class="waves-effect"><i class="fa fa-pagelines fa-fw" aria-hidden="true"></i>Products</a>
                         </li>
                         <li>
                             <a href="map-google.html" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Google Map</a>
                         </li>
                         <li>
-                            <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Blank Page</a>
+                            <a href="admin_logout.php" class="waves-effect"><i class="glyphicon glyphicon-log-out"aria-hidden="true"></i>    Log out</a>
                         </li>
-                        <li>
-                              <a href="admin_logout.php" class="waves-effect"><i class="glyphicon glyphicon-log-out"aria-hidden="true"></i>    Log out</a>
-                        </li>
+                        
                     </ul>
                     
                 </div>
@@ -183,20 +195,15 @@ die ('SQL Error: ' . mysqli_error($conn));
                 <div class="container-fluid">
                     
                     <!-- ============================================================== -->
-                    <!-- table content -->
+                    <!-- table -->
                     <!-- ============================================================== -->
                     <section id="admin">
-                        <h3 class="box-title">Registered Users</h3>
+                        <h3 class="box-title">Reccommended Locations</h3>
                         <table class="data-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Email</th>
-                                    <th>Gender</th>
-                                    <th>Country</th>
-                                    <th>Date of Birth</th>
+                                    <th>Product</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -205,47 +212,51 @@ die ('SQL Error: ' . mysqli_error($conn));
                                 $no = 1;
                                 if ($query-> num_rows > 0) {
                                 while ($row = mysqli_fetch_array($query))
-                               
                                 {
                                 $id= $row['id'];
+                                $product_name= $row['product_name'];
                                 echo
                                 '<tr>
                                     <td>'.$no.'</td>
-                                    <td>'.$row['firstname'].'</td>
-                                    <td>'.$row['lastname'].'</td>
-                                    <td>'.$row['email'].'</td>
-                                    <td>'.$row['gender'].'</td>
-                                    <td>'.$row['country'].'</td>
-                                    <td>'.$row['dob'].'</td>
-                                    <td><a href="delete_user.php?id='.$id.'">Remove User</a><td>
-                                </tr>';
-                                $no++;
-                                }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </section>
-                  
-                    <!-- /.container-fluid -->
-                <footer class="footer text-center"> 2018 &copy; SasinFarm Foods </footer>
+                                    <td>'.$row['product_name'].'</td>
+                                    <td><a href="delete_products.php?id='.$id.'">Delete</a><td>
+                                    </tr>';
+                                    $no++;
+                                    }
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </section>
+                        <form action="admin_addproducts.php"class="form_location" method="POST">
+                            
+                            <input type="text" name="product_name" class="" id="product_name" placeholder="Add a product...">
+                            
+                            <button type="submit" class="button1" value="submit" name="submit">Add</button>
+                        </form>
+                        
+                        
+                        
+                        
+                        <!-- /.container-fluid -->
+                    <footer class="footer text-center"> 2018 &copy; SasinFarm Foods </footer>
+                </div>
             </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page Content -->
-        <!-- ============================================================== -->
-        <!-- /#wrapper -->
-        <!-- jQuery -->
-        <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap Core JavaScript -->
-        <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- Menu Plugin JavaScript -->
-        <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
-        <!--slimscroll JavaScript -->
-        <script src="js/jquery.slimscroll.js"></script>
-        <!--Wave Effects -->
-        <script src="js/waves.js"></script>
-        <!-- Custom Theme JavaScript -->
-        <script src="js/custom.min.js"></script>
-    </body>
-</html>
+            <!-- ============================================================== -->
+            <!-- End Page Content -->
+            <!-- ============================================================== -->
+            <!-- /#wrapper -->
+            <!-- jQuery -->
+            <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap Core JavaScript -->
+            <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- Menu Plugin JavaScript -->
+            <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+            <!--slimscroll JavaScript -->
+            <script src="js/jquery.slimscroll.js"></script>
+            <!--Wave Effects -->
+            <script src="js/waves.js"></script>
+            <!-- Custom Theme JavaScript -->
+            <script src="js/custom.min.js"></script>
+        </body>
+    </html>

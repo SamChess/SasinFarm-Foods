@@ -6,3 +6,4 @@ $connection = new mysqli("localhost", "root", "", "sasin");
 if($connection === false){
 die("ERROR: Could not connect. " . $mysqli->connect_error);
 }
+?>

@@ -2,7 +2,7 @@
 session_start();
 if(isset($_SESSION['user_firstname'])){
 }else{
-    header("location: ../../web/log in.php?login error");
+header("location: ../../web/log in.php?login error");
 }
 $db_host = 'localhost'; // Server Name
 $db_user = 'root'; // Username
@@ -12,7 +12,7 @@ $conn = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 if (!$conn) {
 die ('Failed to connect to MySQL: ' . mysqli_connect_error());
 }
-$sql = 'SELECT location_name FROM location';
+$sql = 'SELECT id,location_name FROM location';
 $query = mysqli_query($conn, $sql);
 if (!$query) {
 die ('SQL Error: ' . mysqli_error($conn));
@@ -81,6 +81,7 @@ die ('SQL Error: ' . mysqli_error($conn));
         color: #FFFFFF;
         border-color: #6ea1cc !important;
         text-transform: uppercase;
+        min-width: 450px;
         }
         /* Table Body */
         .data-table tbody td {
@@ -96,7 +97,7 @@ die ('SQL Error: ' . mysqli_error($conn));
         background-color: #f4fbff;
         }
         .data-table tbody tr:hover td {
-        background-color: #c6ff1a;
+        background-color: #A6BCF8;
         border-color: #ffff0f;
         }
         /* Table Footer */
@@ -118,10 +119,10 @@ die ('SQL Error: ' . mysqli_error($conn));
         font-size:15px;
         padding: .5em;
         margin-left:355px;
+        margin-top: 20px;
         -webkit-appearance: none;
         background: none;
         max-height: 50px;
-
         }
         }
         </style>
@@ -161,7 +162,7 @@ die ('SQL Error: ' . mysqli_error($conn));
                     </div>
                     <ul class="nav" id="side-menu">
                         <li style="padding: 70px 0 0;">
-                            <a href="index_admin.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Dashboard</a>
+                            <a href="index_admin.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Posts</a>
                         </li>
                         <li>
                             <a href="Users.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Users</a>
@@ -170,15 +171,15 @@ die ('SQL Error: ' . mysqli_error($conn));
                             <a href="locations.php" class="waves-effect"><i class=" fa fa-arrows-alt fa-fw" aria-hidden="true"></i>Locations</a>
                         </li>
                         <li>
-                            <a href="fontawesome.html" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Icons</a>
+                            <a href="products.php" class="waves-effect"><i class="fa fa-pagelines fa-fw" aria-hidden="true"></i>Products</a>
                         </li>
                         <li>
                             <a href="map-google.html" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Google Map</a>
                         </li>
                         <li>
-                             <a href="admin_logout.php" class="waves-effect"><i class="glyphicon glyphicon-log-out"aria-hidden="true"></i>    Log out</a>
+                            <a href="admin_logout.php" class="waves-effect"><i class="glyphicon glyphicon-log-out"aria-hidden="true"></i>    Log out</a>
                         </li>
-                      
+                        
                     </ul>
                     
                 </div>
@@ -192,17 +193,18 @@ die ('SQL Error: ' . mysqli_error($conn));
             <!-- ============================================================== -->
             <div id="page-wrapper">
                 <div class="container-fluid">
-                   
+                    
                     <!-- ============================================================== -->
                     <!-- table -->
                     <!-- ============================================================== -->
                     <section id="admin">
-                        <h3 class="box-title">Recommended Locations</h3>
+                        <h3 class="box-title">Reccommended Locations</h3>
                         <table class="data-table">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Location</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -211,47 +213,50 @@ die ('SQL Error: ' . mysqli_error($conn));
                                 if ($query-> num_rows > 0) {
                                 while ($row = mysqli_fetch_array($query))
                                 {
+                                $id= $row['id'];
+                                $location_name= $row['location_name'];
                                 echo
                                 '<tr>
                                     <td>'.$no.'</td>
                                     <td>'.$row['location_name'].'</td>
-                                </tr>';
-                                $no++;
-                                }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </section>
-                    <form action="admin_addlocation.php"class="form_location" method="POST">
+                                    <td><a href="delete_location.php?id='.$id.'">Delete</a><td>
+                                    </tr>';
+                                    $no++;
+                                    }
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </section>
+                        <form action="admin_addlocation.php"class="form_location" method="POST">
+                            
+                            <input type="text" name="location_name" class="" id="location_name" placeholder="Add a location...">
+                            
+                            <button type="submit" class="button1" value="submit" name="submit">Add</button>
+                        </form>
                         
-                        <input type="text" name="location_name" class="" id="location_name" placeholder="Add a location...">
                         
-                        <button type="submit" class="button1" value="submit" name="submit">Add</button>
-                    </form>
-                    
-                    
-                    
-                    
-                    <!-- /.container-fluid -->
-                <footer class="footer text-center"> 2018 &copy; SasinFarm Foods </footer>
+                        
+                        
+                        <!-- /.container-fluid -->
+                    <footer class="footer text-center"> 2018 &copy; SasinFarm Foods </footer>
+                </div>
             </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page Content -->
-        <!-- ============================================================== -->
-        <!-- /#wrapper -->
-        <!-- jQuery -->
-        <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap Core JavaScript -->
-        <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- Menu Plugin JavaScript -->
-        <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
-        <!--slimscroll JavaScript -->
-        <script src="js/jquery.slimscroll.js"></script>
-        <!--Wave Effects -->
-        <script src="js/waves.js"></script>
-        <!-- Custom Theme JavaScript -->
-        <script src="js/custom.min.js"></script>
-    </body>
-</html>
+            <!-- ============================================================== -->
+            <!-- End Page Content -->
+            <!-- ============================================================== -->
+            <!-- /#wrapper -->
+            <!-- jQuery -->
+            <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap Core JavaScript -->
+            <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+            <!-- Menu Plugin JavaScript -->
+            <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+            <!--slimscroll JavaScript -->
+            <script src="js/jquery.slimscroll.js"></script>
+            <!--Wave Effects -->
+            <script src="js/waves.js"></script>
+            <!-- Custom Theme JavaScript -->
+            <script src="js/custom.min.js"></script>
+        </body>
+    </html>

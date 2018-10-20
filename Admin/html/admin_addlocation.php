@@ -34,5 +34,5 @@ else{
 	header("location: index_admin.php?failed=failed");
 	exit();
 	}	
-	echo"haufgsyfbhsafb";
+	
 ?>
