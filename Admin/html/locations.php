@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(isset($_SESSION['user_firstname'])){
+}else{
+    header("location: ../../web/log in.php?login error");
+}
 $db_host = 'localhost'; // Server Name
 $db_user = 'root'; // Username
 $db_pass = ''; // Password
@@ -171,11 +176,9 @@ die ('SQL Error: ' . mysqli_error($conn));
                             <a href="map-google.html" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Google Map</a>
                         </li>
                         <li>
-                            <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Blank Page</a>
+                             <a href="admin_logout.php" class="waves-effect"><i class="glyphicon glyphicon-log-out"aria-hidden="true"></i>    Log out</a>
                         </li>
-                        <li>
-                            <a href="404.html" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Error 404</a>
-                        </li>
+                      
                     </ul>
                     
                 </div>
@@ -189,20 +192,7 @@ die ('SQL Error: ' . mysqli_error($conn));
             <!-- ============================================================== -->
             <div id="page-wrapper">
                 <div class="container-fluid">
-                    <div class="row bg-title">
-                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Dashboard</h4> </div>
-                        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                            <button type="button" class="button">
-                            <span class="glyphicon glyphicon-log-out"></span> Log out
-                            </button>
-                            <ol class="breadcrumb">
-                                <li><a href="#">Dashboard</a></li>
-                            </ol>
-                        </div>
-                        <!-- /.col-lg-12 -->
-                    </div>
-                    
+                   
                     <!-- ============================================================== -->
                     <!-- table -->
                     <!-- ============================================================== -->

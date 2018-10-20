@@ -28,9 +28,11 @@ exit();
 if($row["access_level"] == 1)
 {
 $redirect=true;
+$_SESSION['user_firstname']=$row['firstname'];
 header("location: ../Admin/html/index_admin.php?log in success");
 } else{
 //log in the user
+$id = $row['id'];
 $_SESSION['user_id']=$row['id'];
 $_SESSION['user_firstname']=$row['firstname'];
 $_SESSION['user_lastname']=$row['lastname'];
