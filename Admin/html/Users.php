@@ -137,6 +137,15 @@ die ('SQL Error: ' . mysqli_error($conn));
                         </span> </a>
                     </div>
                     <!-- /Logo -->
+                      <ul class="nav navbar-top-links navbar-right pull-right">
+                        <li>
+                            <a class="profile-pic">
+                                <?php
+                                    echo 'You are Logged in as,  ' . $_SESSION["user_firstname"] . '';
+                                ?> 
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 
             </nav>
@@ -151,7 +160,7 @@ die ('SQL Error: ' . mysqli_error($conn));
                             <a href="index_admin.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Posts</a>
                         </li>
                         <li>
-                            <a href="Users.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Users</a>
+                            <a href="Users.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Users</a>
                         </li>
                         <li>
                             <a href="locations.php" class="waves-effect"><i class=" fa fa-arrows-alt fa-fw" aria-hidden="true"></i>Locations</a>
@@ -160,10 +169,7 @@ die ('SQL Error: ' . mysqli_error($conn));
                             <a href="products.php" class="waves-effect"><i class="fa  fa-pagelines fa-fw" aria-hidden="true"></i>Products</a>
                         </li>
                         <li>
-                            <a href="map-google.html" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Google Map</a>
-                        </li>
-                        <li>
-                            <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Blank Page</a>
+                            <a href="admin_solutions.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Admin Solutions</a>
                         </li>
                         <li>
                               <a href="admin_logout.php" class="waves-effect"><i class="glyphicon glyphicon-log-out"aria-hidden="true"></i>    Log out</a>

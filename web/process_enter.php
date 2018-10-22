@@ -25,10 +25,11 @@ if( $hashedPasswordCheck==false){
 header("location: index.php?login=errorPassword");
 exit();
 }else if( $hashedPasswordCheck==true){
-if($row["access_level"] == 1)
+if($row["access_level"] == 1 ||$row["access_level"] == 2 )
 {
 $redirect=true;
 $_SESSION['user_firstname']=$row['firstname'];
+$_SESSION['user_lastname']=$row['lastname'];
 header("location: ../Admin/html/index_admin.php?log in success");
 } else{
 //log in the user

@@ -13,13 +13,13 @@ header("location: ../../web/log in.php?login error");
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+        <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
         <title>Admin Login Sasin</title>
         <!-- Bootstrap Core CSS -->
         <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Menu CSS -->
         <link href="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
-        <!-- toast CSS -->
-        <link href="../plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
+        
         <!-- morris CSS -->
         <link href="../plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
         <!-- chartist CSS -->
@@ -31,12 +31,7 @@ header("location: ../../web/log in.php?login error");
         <link href="css/style.css" rel="stylesheet">
         <!-- color CSS -->
         <link href="css/colors/default.css" id="theme" rel="stylesheet">
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        >
     </head>
     <body class="fix-header">
         <!-- ============================================================== -->
@@ -67,6 +62,15 @@ header("location: ../../web/log in.php?login error");
                         </span> </a>
                     </div>
                     <!-- /Logo -->
+                    <ul class="nav navbar-top-links navbar-right pull-right">
+                        <li>
+                            <a class="profile-pic">
+                                <?php
+                                    echo 'You are Logged in as,  ' . $_SESSION["user_firstname"] . '';
+                                ?> 
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 
             </nav>
@@ -81,7 +85,7 @@ header("location: ../../web/log in.php?login error");
                             <a href="index_admin.php" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>Posts</a>
                         </li>
                         <li>
-                            <a href="Users.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Users</a>
+                            <a href="Users.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Users</a>
                         </li>
                         <li>
                             <a href="locations.php" class="waves-effect"><i class=" fa fa-arrows-alt fa-fw" aria-hidden="true"></i>Locations</a>
@@ -90,10 +94,7 @@ header("location: ../../web/log in.php?login error");
                             <a href="products.php" class="waves-effect"><i class="fa fa-pagelines fa-fw" aria-hidden="true"></i>Products</a>
                         </li>
                         <li>
-                            <a href="map-google.html" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Google Map</a>
-                        </li>
-                        <li>
-                            <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Blank Page</a>
+                            <a href="admin_solutions.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Admin Solutions</a>
                         </li>
                         <li>
                             <a href="admin_logout.php" class="waves-effect"><i class="glyphicon glyphicon-log-out"aria-hidden="true"></i>   Log out</a>

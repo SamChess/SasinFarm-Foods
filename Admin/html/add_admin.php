@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_POST['submit'])){
+if (isset($_POST['add'])){
 
 	include_once "connection.php";
 
@@ -14,7 +14,7 @@ if (isset($_POST['submit'])){
 //check for errors
 //check for empty fields
 if(empty($firstname)||empty($lastname)||empty($email)||empty($gender)||empty($country)||empty($dob)||empty($password) ){
-	header("location: index.php?signup=empty");
+	header("location: index.php?register=empty");
 	exit();
 }
 else{
@@ -26,7 +26,7 @@ else{
 	else{
 		//check if email is valid
 		if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-			header("location: index.php?signup=invalid email");
+			header("location: index.php?register=invalid email");
 	exit();
 		}
 		else{
@@ -34,15 +34,15 @@ else{
 			$result=mysqli_query($connection,$sql);
 			$resultcheck=mysqli_num_rows($result);
 			if($resultcheck>0){
-				header("location: index.php?signup=username taken");
+				header("location: index.php?signup=username_Admin taken");
 	exit();
 			}else{
 				//hasshing the password
 				$hashPassword=password_hash($password,PASSWORD_DEFAULT);
 				//insert user into the database
-				$sql="INSERT INTO users (firstname,lastname,email,gender,country,dob,password,access_level) VALUES ('$firstname', '$lastname', '$email','$gender','$country','$dob','$hashPassword',0)";
+				$sql="INSERT INTO users (firstname,lastname,email,gender,country,dob,password,access_level) VALUES ('$firstname', '$lastname', '$email','$gender','$country','$dob','$hashPassword',2)";
 				$result=mysqli_query($connection,$sql);
-				header("location: log in.php?signup=success");
+				header("location: admin_solutions.php?registerAdmin=success");
 				exit();
 			}
 		}
@@ -51,7 +51,7 @@ else{
 }
 
 	else{
-	header("location: index.php");
+	header("location: admin_solutions.php");
 	exit();
 	}	
 ?>

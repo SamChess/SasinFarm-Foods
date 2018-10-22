@@ -84,10 +84,11 @@ if(isset($_SESSION['user_firstname'])){
 								<!--<li><a href="about.php">About</a></li>-->
 								<li class=""><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts<span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a class="hvr-bounce-to-bottom" href="view_posts.php">View Post</a></li>
-									<li><a class="hvr-bounce-to-bottom" href="create_posts.php">Create Post</a></li>
+									<li><a class="hvr-bounce-to-bottom" href="view_posts.php">View</a></li>
+									<li><a class="hvr-bounce-to-bottom" href="create_posts.php">Create</a></li>
 								</ul>
 								<li><a class="list-border1 active" href="log out.php">Log out</a></li>
+								
 								<div class="names">
 									<?php
 									echo 'Hi, ' . $_SESSION["user_firstname"] . ' ' . $_SESSION["user_lastname"];

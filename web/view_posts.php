@@ -106,7 +106,7 @@ if(isset($_SESSION['user_firstname'])){
 		<div class="row">
 			<?php
 // Include the database configuration file
-include 'connection.php';
+    include 'connection.php';
    	$query=mysqli_query($connection,"select count(id) from `product_posts`");
 	$row = mysqli_fetch_row($query);
  
