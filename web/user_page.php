@@ -29,6 +29,7 @@ if(isset($_SESSION['user_firstname'])){
 		<link href="//fonts.googleapis.com/css?family=Playball&amp;subset=latin-ext" rel="stylesheet">
 		<link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 		<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700italic,700,400italic,300italic,300' rel='stylesheet' type='text/css'>
+		
 		<!-- //font -->
 		<script src="js/jquery-1.11.1.min.js"></script>
 		<script src="js/bootstrap.js"></script>
@@ -40,6 +41,11 @@ if(isset($_SESSION['user_firstname'])){
 				});
 			});
 		</script>
+		<style type="text/css">
+			img {
+				max-height: 220px;
+				}
+		</style>
 	</head>
 	<body>
 		<!-- banner -->
@@ -95,82 +101,127 @@ if(isset($_SESSION['user_firstname'])){
 								<div class="names">
 									<?php
 									echo 'Hi, ' . $_SESSION["user_firstname"] . ' ' . $_SESSION["user_lastname"];
-								    ?> 
-							</div>
+									?>
+								</div>
 							</div>
 						</nav>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- //banner -->
-		
-		<!-- footer -->
-		<div class="footer">
+		<div class="gallery">
 			<div class="container">
-				<div class="agile-footer-grids">
-					<div class="col-md-3 w3-agile-footer-grid">
-						<h3>About</h3>
-						<p>Our priority as SasinFarm Foods is to make sure that both the farmers and the buyers find a favourable platform to conduct their business</p>
+				<div class="gallery-grids">
+					<div class="gallery-grids">
+						<div class="gallery">
+							<div class="container">
+								<div class="gallery-grids">
+								
+									<?php
+									include 'connection.php';
+									
+									$query = $connection->query("SELECT id,fileName,product,description,dateC FROM product_posts");
+												if($query->num_rows > 0){
+												while($row = $query->fetch_assoc()){
+												$imageURL = 'uploads/'.$row["fileName"];
+												$product= $row['product'];
+												$description= $row['description'];
+												$dateC= $row['dateC'];
+												$id = $row['id'];
+									
+									echo '
+														<div class="col-lg-4 col-sm-6 portfolio-item">
+															<div class="grid">
+																<figure class="effect-roxy">
+																	<img src="'. $imageURL.'" alt="" />
+																		<figcaption>
+																			<h3> <span>'.$product.'</a></span></h3>
+																				<p>'.$description.'</p>
+																		</figcaption>
+																</figure>
+														    </div>
+											            </div>'
+											
+								?>
+								<?php }
+								}else{ ?>
+								<p>No image(s) found...</p>
+								<?php } ?>
+							</div>
+						</div>
 					</div>
-					<div class="col-md-3 w3-agile-footer-grid">
-						<h3>Events</h3>
-						<ul>
-							<li>12th Nov,2018 <a href="single.html">Symposium Talks</a></li>
-							<li>10th Dec,2018<a href="single.html">Machinery use</a></li>
-							<li>24th Jan,2019<a href="single.html">Technology Innovation</a></li>
-							<li>17th Mar,2019<a href="single.html">Saving money </a></li>
-							<li>09th Dec,2019 <a href="single.html">Quality Seeds</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3 w3-agile-footer-grid">
-						<h3>Navigation</h3>
-						<ul>
-							<li class="text"><a href="about.html">About</a></li>
-							<li class="text"><a href="typography.html">Typography</a></li>
-							<li class="text"><a href="icons.html">Icons</a></li>
-							<li class="text"><a href="gallery.html">Gallery</a></li>
-							<li class="text"><a href="log in.php">Contact</a></li>
-						</ul>
-					</div>
-					<div class="col-md-3 w3-agile-footer-grid">
-						<h3>Newsletter</h3>
-						<form action="#" method="post">
-							<input type="email" id="mc4wp_email" name="EMAIL" placeholder="Enter your email here" required="">
-							<input type="submit" value="Subscribe">
-						</form>
-					</div>
-					<div class="clearfix"> </div>
 				</div>
 			</div>
 		</div>
-		<!-- //footer -->
-		<!-- copyright -->
-		<div class="copyright">
-			<div class="container">
-				<p>| © 2018 SasinFarm Foods . All Rights Reserved | </p>
+	</div>
+	<!-- //banner -->
+	
+	<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="agile-footer-grids">
+				<div class="col-md-3 w3-agile-footer-grid">
+					<h3>About</h3>
+					<p>Our priority as SasinFarm Foods is to make sure that both the farmers and the buyers find a favourable platform to conduct their business</p>
+				</div>
+				<div class="col-md-3 w3-agile-footer-grid">
+					<h3>Events</h3>
+					<ul>
+						<li>12th Nov,2018 <a href="single.html">Symposium Talks</a></li>
+						<li>10th Dec,2018<a href="single.html">Machinery use</a></li>
+						<li>24th Jan,2019<a href="single.html">Technology Innovation</a></li>
+						<li>17th Mar,2019<a href="single.html">Saving money </a></li>
+						<li>09th Dec,2019 <a href="single.html">Quality Seeds</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 w3-agile-footer-grid">
+					<h3>Navigation</h3>
+					<ul>
+						<li class="text"><a href="about.html">About</a></li>
+						<li class="text"><a href="typography.html">Typography</a></li>
+						<li class="text"><a href="icons.html">Icons</a></li>
+						<li class="text"><a href="gallery.html">Gallery</a></li>
+						<li class="text"><a href="log in.php">Contact</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 w3-agile-footer-grid">
+					<h3>Newsletter</h3>
+					<form action="#" method="post">
+						<input type="email" id="mc4wp_email" name="EMAIL" placeholder="Enter your email here" required="">
+						<input type="submit" value="Subscribe">
+					</form>
+				</div>
+				<div class="clearfix"> </div>
 			</div>
 		</div>
-		<!-- //copyright -->
-		<script src="js/SmoothScroll.min.js"></script>
-		<script type="text/javascript" src="js/move-top.js"></script>
-		<script type="text/javascript" src="js/easing.js"></script>
-		<!-- here stars scrolling icon -->
-		<script type="text/javascript">
-			$(document).ready(function() {
-				/*
-					var defaults = {
-					containerID: 'toTop', // fading element id
-					containerHoverID: 'toTopHover', // fading element hover id
-					scrollSpeed: 1200,
-					easingType: 'linear'
-					};
-				*/
-									
-				$().UItoTop({ easingType: 'easeOutQuart' });
-									
-				});
-		</script>
-		<!-- //here ends scrolling icon -->
-	</body>
+	</div>
+	<!-- //footer -->
+	<!-- copyright -->
+	<div class="copyright">
+		<div class="container">
+			<p>| © 2018 SasinFarm Foods . All Rights Reserved | </p>
+		</div>
+	</div>
+	<!-- //copyright -->
+	<script src="js/SmoothScroll.min.js"></script>
+	<script type="text/javascript" src="js/move-top.js"></script>
+	<script type="text/javascript" src="js/easing.js"></script>
+	<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+	<!-- //here ends scrolling icon -->
+</body>
 </html>

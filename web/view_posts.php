@@ -166,13 +166,14 @@ if(isset($_SESSION['user_firstname'])){
     }
 	}
 // Get images from the databaseweight,
-$query = $connection->query("SELECT id,fileName,product,weight,description,dateC FROM product_posts  ORDER BY dateC DESC $limit");
+$query = $connection->query("SELECT id,fileName,product,phone_number,weight,description,dateC FROM product_posts  ORDER BY dateC DESC $limit");
 
 if($query->num_rows > 0){
     while($row = $query->fetch_assoc()){
         $imageURL = 'uploads/'.$row["fileName"];
         $product= $row['product'];
         $description= $row['description'];
+        $phone_number= $row['phone_number'];
         $dateC= $row['dateC'];
         $id = $row['id'];
         

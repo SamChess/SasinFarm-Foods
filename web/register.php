@@ -76,11 +76,6 @@
 								<ul class="nav navbar-nav">
 									<li><a class="list-border" href="index.php">Home</a></li>
 									<li><a href="about.php">About</a></li>
-									<li class=""><a href="#" class="dropdown-toggle hvr-bounce-to-bottom" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Codes<span class="caret"></span></a>
-									<ul class="dropdown-menu">
-										<li><a class="hvr-bounce-to-bottom" href="icons.html">Icons</a></li>
-										<li><a class="hvr-bounce-to-bottom" href="typography.html">Typography</a></li>
-									</ul>
 								</li>
 								<li><a href="gallery.php">Gallery</a></li>
 								<li><a class="list-border1 active" href="log in.php">Log in</a></li>

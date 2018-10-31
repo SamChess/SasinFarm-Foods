@@ -14,19 +14,19 @@ if (isset($_POST['add'])){
 //check for errors
 //check for empty fields
 if(empty($firstname)||empty($lastname)||empty($email)||empty($gender)||empty($country)||empty($dob)||empty($password) ){
-	header("location: index.php?register=empty");
+	header("location: admin_solutions.php?register=empty");
 	exit();
 }
 else{
 	//check if input characterrs are valid
 	if(!preg_match("/^[a-zA-Z0-9]*$/",$firstname)|| !preg_match("/^[a-zA-Z]*$/",$lastname)){
-		header("location: index.php?signup=invalid characters in firstname or lastname");
+		header("location: admin_solutions.php?signup=invalid characters in firstname or lastname");
 	exit();
 	}
 	else{
 		//check if email is valid
 		if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-			header("location: index.php?register=invalid email");
+			header("location: admin_solutions.php?register=invalid email");
 	exit();
 		}
 		else{
@@ -34,7 +34,7 @@ else{
 			$result=mysqli_query($connection,$sql);
 			$resultcheck=mysqli_num_rows($result);
 			if($resultcheck>0){
-				header("location: index.php?signup=username_Admin taken");
+				header("location: admin_solutions.php?signup=username_Admin taken");
 	exit();
 			}else{
 				//hasshing the password

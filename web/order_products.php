@@ -15,6 +15,7 @@ die ('Failed to connect to MySQL: ' . mysqli_connect_error());
 $id = $_GET['id'];
 $sql = 'SELECT id,product,location,weight,unit_price,phone_number,description,dateC FROM product_posts WHERE id='.$id.';';
 $query = mysqli_query($conn, $sql);
+
 if (!$query) {
 die ('SQL Error: ' . mysqli_error($conn));
 }
@@ -176,13 +177,14 @@ die ('SQL Error: ' . mysqli_error($conn));
 									$id = $_GET['id'];
 									$sql = 'SELECT id,phone_number,dateC FROM product_posts WHERE id='.$id.';';
                                     $order = mysqli_real_escape_string($connection, $_POST["order"]);
-                                    
+                                    $phone_number=$row['phone_number'];
 
 									// authentication credentials
 									$username   = "sandbox";
 									$apikey     = "f6b913f6c76c8d92a14b6915d61a6968ed0a27c76437ac593a70618907035bb8";
 									// Specify the numbers that you want to send to in a comma-separated list
-									$recipients = '0715685500,0706856000';
+									$recipients ='0706856000,0719451291';
+									echo $phone_number;
 									// message order
 
 									$message    =$order;
