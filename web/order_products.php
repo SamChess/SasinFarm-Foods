@@ -174,6 +174,16 @@ die ('SQL Error: ' . mysqli_error($conn));
 									if (isset($_POST['submit'])){
 									require_once('AfricasTalkingGateway.php');
 									require_once('connection.php');
+
+                                    $id = $_GET['id'];
+									$query = $connection->query('SELECT * FROM product_posts WHERE id='.$id.';');
+
+											if($query->num_rows > 0){
+											    while($row = $query->fetch_assoc()){
+											      
+											        $phone_number= $row['phone_number'];
+											        
+
 									$id = $_GET['id'];
 									$sql = 'SELECT id,phone_number,dateC FROM product_posts WHERE id='.$id.';';
                                     $order = mysqli_real_escape_string($connection, $_POST["order"]);
@@ -183,8 +193,7 @@ die ('SQL Error: ' . mysqli_error($conn));
 									$username   = "sandbox";
 									$apikey     = "f6b913f6c76c8d92a14b6915d61a6968ed0a27c76437ac593a70618907035bb8";
 									// Specify the numbers that you want to send to in a comma-separated list
-									$recipients ='0706856000,0719451291';
-									echo $phone_number;
+									$recipients =$phone_number;
 									// message order
 
 									$message    =$order;
@@ -203,8 +212,11 @@ die ('SQL Error: ' . mysqli_error($conn));
 									//echo " Status: " .$result->status;
 									//echo " StatusCode: " .$result->statusCode;
 									//echo " MessageId: " .$result->messageId;
-									//echo " Cost: "   .$result->cost."\n";
-									echo "You have successfully sent an alert to the Seller!!";
+									//echo" Cost: "   .$result->cost."\n";
+									echo "You have successfully sent an alert to the Seller!!<br><br>";
+									echo "Phone Number of Seller:     " .$phone_number;
+									echo "<br><br>";
+									echo " Message Id: " .$result->messageId;
 									}
 									}
 									catch ( AfricasTalkingGatewayException $e )
@@ -212,6 +224,8 @@ die ('SQL Error: ' . mysqli_error($conn));
 									echo "Encountered an error while sending: ".$e->getMessage();
 									}
 								}
+							}
+						}
 									?>
 								</fieldset>
 							</form>
